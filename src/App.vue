@@ -1,26 +1,32 @@
+<!-- YourMainComponent.vue -->
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div
+    class="d-flex flex-column justify-content-center align-items-center py-4"
+  >
+    <h2>Mockup Generator</h2>
+    <MockupPreview :logo="uploadedLogo" />
+    <LogoUploader @logo-uploaded="handleLogoUploaded" />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import LogoUploader from "@/components/LogoUploader.vue";
+import MockupPreview from "@/components/MockupPreview.vue";
 
 export default {
-  name: 'App',
   components: {
-    HelloWorld
-  }
-}
+    LogoUploader,
+    MockupPreview,
+  },
+  data() {
+    return {
+      uploadedLogo: null,
+    };
+  },
+  methods: {
+    handleLogoUploaded(logo) {
+      this.uploadedLogo = URL.createObjectURL(logo);
+    },
+  },
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
